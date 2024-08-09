@@ -1,0 +1,53 @@
+
+
+% \documentclass[12pt]{article}
+% \documentclass[10.8pt, a4paper, USenglish, twocolumn]{article}
+
+% https://cloudnet2016.ieee-cloudnet.org/authors/final-submission/
+\documentclass[10pt,conference]{IEEEtran}
+
+
+
+\usepackage{isaks_template} % Contains all included packages. See isaks_template.sty.
+
+% latex margins
+% \linespread{1.5}
+\newgeometry{vmargin={15mm}, hmargin={25mm,37mm}}
+%
+\title{ {\Large \textbf{Curve Signatures in Theory and Applications }} }
+% IF ONE AUTHOR
+%\address{Norwegian University of Science and Technology \\
+%Department of Mathematical Sciences \\
+%{\tt isakhammer@gmail.com}}
+%
+
+\begin{document}
+\author{
+Isak Hammer$^{\star\dagger}$  \\
+{\small Supervisor: André Massing$^{\dagger} $  } \\
+{\small  January 10, 2023}\\
+{\footnotesize $^\star$isakhammer@gmail.com }
+% \vspace{7mm} %5mm vertical space
+{\footnotesize $^\dagger$Department of Mathematical Sciences, NTNU}\\
+}
+
+\maketitle
+% Comment this out to remove todos
+% https://tex.stackexchange.com/questions/4830/how-to-hide-todo-notes-without-deleting-them-manually
+% \renewcommand{\todo}[1]{}
+\begin{sloppy}
+\textit{ \textbf{Note.} This article is submitted as an examination in the course TMA4310 Mathematical Subjects, Advanced Course for the spring semester 2023 at the Department of Mathematical Sciences, NTNU \\}
+
+
+\begin{abstract}
+    Abstract about some
+\end{abstract}
+
+    \input{introduction}
+    \input{background-theory}
+    \input{rough_paths}
+
+    \printbibliography
+\end{sloppy}
+
+\end{document}

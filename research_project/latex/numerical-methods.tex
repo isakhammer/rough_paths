@@ -1,0 +1,282 @@
+
+\section{Numerical methods}%
+\label{sec:numerical_methods}
+
+
+ To be able to find a numerical approximation of the weak formulation \eqref{eq:WE_weak_form} will we formulate an evolving surface element method (FEM) for the evolutionary equation PDEs coupled with the evolving surface velocity. We will mostly
+ use the notation and methods described in \cite{kovacs2021convergent, hu2022evolving}.
+
+\subsection{ Triangular mesh for $\Gamma ^{0}$  }%
+\label{sub:triangular_mesh}
+
+Let initial surface $\Gamma ^{0} \in  \mathbb{R} ^3$ have the triangular mesh $\mathcal{T}_{h} $ constisting of triangles $T$. We will assume that the mesh is conform, i.e., for any $T_{1}, T_{2} \in \mathcal{T}_h$,  $T_{1} \neq T_{2}$ and $T_{1} \cap T_{2} \neq \emptyset
+$, then must $T_{1}$  and $T_{2}$ share either a vertex or a facet. Let diameter of each triangle $h_{T}$  be denoted as,
+\[
+    \begin{split}
+    h_{T} & = \max_{x_{1}, x_{2} \in T} dist(x_{1}, x_{2}), \\
+h_{min} & = \min_{T \in \mathcal{T} _{h}} h_{T}, \\
+h_{max} & = \max_{T \in \mathcal{T} _{h}} h_{T},
+    \end{split}
+\]
+where $h_{min}$ and $h_{max}$ is the maximum and minimum diameter of an individual triangle $T$ in $\mathcal{T}_{h} $. We define the chunkiness parameter $c_{T} = h_{T}/r_{T}$, where $r_{T}$ is the largest ball inside inscribed in $T$. We will then
+assume that the mesh is shape regular and quasi-uniform, i.e., $c_{T} \le c $ and $h_{max} \le c h_{min} $ for a  constant $c$ independent of $h_{T} $ and $T$.
+See \cite[Section 4.1]{dziuk2013finite} for more information.
+
+
+\subsection{Finite surface element}%
+\label{sub:surface_element_method}
+In this section is, the goal to develop discrete analogues of the definitions we introduced in subsections \ref{sub:differential_calculus} and \ref{sub:evolutionary_equations}.
+
+
+Let $\mathcal{T}_{h}  $ be the triangulation of $\Gamma ^{0}$. Now denote the vector $ \mathbf{x} = \mathbf{x} \left( t \right)  \in \mathbb{R} ^{3N}$ as a collection of all evolving nodes, $x_{j}\left( t \right)  \in  \mathbb{R} ^3$, $j \in  \mathcal{I} $, by a piecewise polynomial interpolation
+with degree $k$. Here is the index of all the nodes defined as $\mathcal{I} =\left\{ 1, \ldots, N \right\}  $, where $N$ is the total number of nodes.
+
+We denote the discretized surface, $\Gamma _{h} \left[ \mathbf{x}\left( t \right)  \right] $, to be the numerical approximation of the surface $\Gamma \left( t \right) $. As an initial condition do we construct the initial nodes, $
+ x_{j}( 0 )  = p_{j} \forall j \in  \mathcal{I}  $, s.t.
+ $\Gamma _{h}^{0  } = \Gamma _{h} \left[ \mathbf{x}\left( 0 \right)   \right] $ interpolates the initial surface, $\Gamma ^{0}$ in the nodal points $p_{j} \in \Gamma ^{0}, \  j \in  \mathcal{I} $.
+
+An essential piece of the puzzle is the finite element basis on $\Gamma _{h}\left[ \mathbf{x} \right] $, which is denoted to have the form,
+\[
+ \phi_{j} \left[ \mathbf{x} \right]: \Gamma_{h}\left[ \mathbf{x} \right] \mapsto \mathbb{R} , \quad   j \in  \mathcal{I} .
+\]
+\todo[inline]{ How can the basis vectors move? And how is it related to the definition of $X_{h}$ later in the subsection?  }
+In fact, the basis satisfies the identity,
+\[
+\phi _{j} \left[ \mathbf{x} \right] \left( x_{i} \right)  = \delta _{ij} \quad \forall i,j \in  \mathcal{I} .
+\]
+
+Finally, we can now define the so-called evolving finite element space of $\Gamma _{h}\left[ \mathbf{x}\left( t \right)  \right] $ as,
+\[
+    \begin{split}
+S_{h}\left[ \mathbf{x} \right]   & = S_{h}\left( \Gamma _{h}\left[ \mathbf{x} \right]  \right) \\
+ & = span\left\{ \sum_{j \in  \mathcal{I}  }^{}  c_{j} \phi _{j}\left[ \mathbf{x} \right]  \mid  c_{j} \in \mathbb{R}   \right\}.
+    \end{split}
+\]
+
+More precisely, can we denote a $C^{0}$ finite element space of $k$-th order as,
+\begin{equation*}
+    \begin{split}
+S_{h,k}\left[ \mathbf{x} \right]   =   \{ & \chi  _{h} \in C^{0}\left( \Gamma _{h}\left[ \mathbf{x} \right]  \right),  \\
+&\chi _{h} \in \mathcal{P}^{k }\left( T \right) \forall T \in \mathcal{T}_{h}           \},
+    \end{split}
+\end{equation*}
+where $\mathcal{P}^{k} $ is the set of all polynomials in three dimensions with order less or equal to $k$. We will use the notation $S_{h}\left[ \mathbf{x} \right] = S_{h,k}\left[ \mathbf{x} \right] $ unless the order of the element is specified. In
+the three dimensions defined as, \[
+S_{h}\left[ \mathbf{x} \right] ^{3}  =
+(
+S_{h}\left[ \mathbf{x} \right],
+S_{h}\left[ \mathbf{x} \right],
+S_{h}\left[ \mathbf{x} \right]
+)^{T}.
+\]
+The discretized surface mapping, $X_{h}: \Gamma_{h} ^{0} \mapsto  \Gamma _{h} \left[ \mathbf{x}\left( t \right)  \right] $, is denoted as \[
+X_{h}\left( p_{h},t \right) = \sum_{j \in \mathcal{I} }^{}  x_{j}\left( t \right)  \phi \left[ x\left( 0 \right)  \right] \left( p_{h} \right), \  p_{h} \in \Gamma ^{0}_{h},
+\]
+and the problem obviously does satisfy the identities; $X_{h}\left( p_{h},0 \right)  = p_{h} \forall p_{h} \in \Gamma _{h}$, the evolutionary property $X_{h} \left( p_{j}, t \right)  = x_{j}\left( t \right)  \forall j \in \mathcal{I} $, and
+\[
+    \begin{split}
+        \Gamma _{h} & = \Gamma_{h} \left( t \right) =   \Gamma_{h} \left[ \mathbf{x}\left( t \right)  \right]  \\
+                                    &= \Gamma_{h}\left[ X_{h}\left( \cdot ,t \right)  \right] \\
+&=\left\{ X_{h}\left( p_{h},t \right): p_{h} \in  \Gamma ^{0}_{h} \right\}.
+    \end{split}
+\]
+\todo[inline]{Need to check if the definition of $\Gamma _{h}\left[ \mathbf{x}  \right] = \Gamma_{h}\left[ X_{h}\left( \cdot ,t \right)  \right] $ makes sense. Also made $\Gamma _{h} = \Gamma _{h}\left[ \mathbf{x}\left( t \right)  \right] $ som et kunstig innslag. }
+For shorthand notation, is the discretized point defined as $x_{h} = X_{h}\left( p_{h},t \right) \in \Gamma _{h} $.
+Thus discretized velocity $v_{h}\left( x_{h},t \right): \Gamma _{h} \mapsto  \mathbb{R} ^{3} $ is defined as \[
+    v_{h}\left( x_{h},t \right)  = \sum_{j \in \mathcal{I} }^{} v_{j}\left( t \right) \phi _{j}\left[ \mathbf{x}\left( t \right)  \right] \left( x_{h} \right).
+\]
+Hence, by introducing  $\mathbf{v} = \mathbf{v}\left( t \right)  $ as a collection of the velocity nodes,  $v_{j} \in \mathbb{R} ^3$, can we define the evolutionary dynamics of the nodal points $\mathbf{x}$ s.t. this holds,
+\[
+\frac{d}{dt}\mathbf{x}\left( t \right) = \mathbf{v}\left( t \right).
+\]
+
+Ultimately, the discrete material derivative of a function $f_{h}: \Gamma _{h} \mapsto  \mathbb{R} $ is simply defined in the direction in the velocity $v_{h}$  as \[
+    \begin{split}
+\frac{D}{Dt}f_{h}\left( x_{h}, t; v_{h}   \right) & = \frac{d}{dt} f_{h}\left( x_{h}, t; v_{h}   \right) \\
+ & = \sum_{j \in \mathcal{I} }^{} \frac{d f_{j} \left( t \right) }{dt} \phi _{j}\left[ \mathbf{x} \right] \left( x_{h} \right)
+    \end{split}
+\]
+where $f_{j}$ is the nodal variables.
+
+\todo[inline]{ Is $ \frac{d f_{j} \left( t \right) }{dt}$  this consistent with  the similar definition of the velocity? I guess so since $\dot{x_{j}} = v_{j}$. Anyhow, I am also wondering if the basis functions should have time derivatives as
+well.  }.
+
+
+
+\subsection{Evolving surface finite element method }%
+\label{sub:surface_finite_element_method}
+
+\todo[inline]{Need to write an introduction based on dzuik13 page 332, but also understand the equivalence between my notation and the one used.}
+
+The goal is to construct a evolving finite element scheme using the evolving finite element space.
+Let us denote the following trial functions,
+\begin{equation}
+\label{eq:FE_trial}
+    \begin{split}
+& ( H_{h} \times V_{h} \times \nu_{h}  \times z_{h} ) \in \\
+&\left( S_{h}\left[ \mathbf{x} \right],S_{h}\left[ \mathbf{x} \right], S_{h}\left[ \mathbf{x} \right] ^3,S_{h}\left[ \mathbf{x} \right] ^3    \right),
+    \end{split}
+\end{equation}
+and similarly the test functions,
+\begin{equation}
+\label{eq:FE_test}
+    \begin{split}
+& ( \chi_{h}^{H}  \times \chi_{h} ^{V} \times \chi_{h} ^{\nu }  \times \chi_{h} ^{z} ) \in \\
+&\left( S_{h}\left[ \mathbf{x} \right],S_{h}\left[ \mathbf{x} \right], S_{h}\left[ \mathbf{x} \right] ^3,S_{h}\left[ \mathbf{x} \right] ^3    \right),
+    \end{split}
+.\end{equation}
+We will define the discrete helping functions as,
+\[
+    \begin{split}
+v_{h} & = V_{h}\nu_{h}, \\
+Q_{h} & =  - \frac{1}{2} H_{h}^{3} + H_{h} \left\lvert A_{h} \right\rvert^2, \\
+A_{h} & = \frac{1}{2}\left( \nabla _{\Gamma_{h} } \nu_{h} + \left( \nabla _{\Gamma _{h}}\nu _{h} \right) ^{T} \right)
+    \end{split}
+\]
+\todo[inline]{ Why is the $A_{h}$ symmetric denoted in this fashion?   }
+
+% For the error analysis, is a good idea to define the discrete velocity as, $v_{h} = \widetilde{I}_{h}\left( V_{h} \nu _{h} \right)  $,  where the interpolation operator is defined s.t. $ \widetilde{I}_{h}: C\left( \Gamma _{h}\left[ \mathbf{x} \right] \right) \mapsto  S_{h}\left[
+% \mathbf{x} \right]     $. However, we will not use the interpolation estimate since it is out of the scope of this article. For more information see \cite[Remark 3.1]{kovacs2021convergent}.
+
+
+The evolving surface FEM for \eqref{eq:WE_strong_form} is to find trial functions \eqref{eq:FE_trial} and $x_{h} $ s.t. it satisfies the following discrete weak formulation \eqref{eq:WE_weak_form} for
+all test functions \eqref{eq:WE_test}. Again, see \cite{kovacs2021convergent} for more information.
+
+\begin{subequations}
+\label{eq:FEM}
+ \begin{align}
+\left( \frac{d}{dt}H_{h}, \chi_{h} ^{H} \right)_{\Gamma_{h} } =&  \left( \nabla _{\Gamma_{h} } V_{h}, \nabla _{\Gamma_{h} }\chi_{h} ^{H} \right) _{\Gamma_{h} } \nonumber \\
+                                                   &- \left( \left\lvert A_{h} \right\rvert ^2 V_{h}, \chi_{h} ^{H} \right) _{\Gamma_{h} },   \\
+\left( V_{h}, \chi_{h} ^{V} \right)_{\Gamma } =& -\left( \nabla _{\Gamma_{h} } H_{h}, \nabla _{\Gamma_{h} } \chi_{h} ^{V} \right) \nonumber \\
+ & + \left( Q_{h}, \chi_{h} ^{V} \right)_{\Gamma_{h} },   \\
+\left( \frac{d}{dt} \nu_{h} , \chi_{h} ^{\nu } \right)_{\Gamma_{h} } =& \left( \nabla _{\Gamma_{h} }z_{h}, \nabla _{\Gamma_{h} } \chi_{h} ^{\nu } \right) _{\Gamma_{h} }\nonumber   \\
+ & + \left( ( H_{h}A_{h} - A_{h}^2  )z_{h},\chi_{h}^\nu  \right)_{\Gamma_{h} }   \nonumber \\
+ & + \left( \left\lvert \nabla _{\Gamma_{h} } H_{h} \right\rvert^2 \nu_{h} , \chi_{h} ^{\nu_{h} }  \right)_{\Gamma_{h}} \nonumber  \\
+ & + \left(  A_{h}^2\nabla _{\Gamma_{h} } H_{h}, \chi_{h} ^{\nu_{h} }  \right)_{\Gamma_{h}} \nonumber  \\
+ & + 2 \left( A_{h} \nabla _{\Gamma_{h} } H_{h}, \nabla _{\Gamma_{h} } \chi_{h} ^{\nu_{h} } \nu_{h}  \right)_{\Gamma_{h}} \nonumber    \\
+ &  + \left( Q_{h}, \nabla _{\Gamma_{h} } \cdot \chi_{h} ^{\nu_{h} }  \right)_{\Gamma_{h} } \nonumber  \\
+  &- \left( Q_{h}H_{h}\nu_{h} , \chi_{h} ^{\nu_{h} } \right) _{\Gamma_{h}},\\
+\left( z_{h}, \chi_{h} ^{z} \right) _{\Gamma_{h} }  =& - \left( \nabla _{\Gamma_{h} } \nu_{h} , \nabla _{\Gamma_{h} } \chi_{h} ^{z_{h}} \right)_{\Gamma_{h}} \nonumber \\
+ & + \left( \left\lvert A_{h} \right\rvert ^2 \nu_{h} , \chi_{h} ^{z} \right) \\
+\frac{d}{dt}x_h &= v_h
+ .\end{align}
+\end{subequations}
+Note that the time-dependent variables $\nu_{h}, H_{h} $ and $x_{h}$ is initialized at $t=0$  based on $\Gamma ^{0}$.
+
+
+
+
+\todo[inline]{Remark that we have not yet discretized in the time dimension. Check \cite[p. 363]{dziuk2013finite}}
+
+\todo[inline]{Should probably mention that further work will be to implement this in Ngsolve.}
+
+\todo[inline]{Things to discuss are convergence estimates, lifting operator, time discretization and how to treat the nonlinear parts.}
+
+\subsection{The matrix-vector formulation}%
+\label{sub:the_matrix_formulation}
+
+To simplify the system presented in \eqref{eq:FEM} is it possible to solve a equivalent i a matrix-vector formulation.
+
+First of all, let us represent the nodal values as vectors. Let the velocity have the form $\mathbf{v} = \left( v_{j} \right) \in \mathbb{R} ^{3N}$ with the
+corresponding speed $\mathbf{V} =
+\left( V_{j} \right) \in \mathbb{R} ^{N} $ and normal vector $\mathbf{n} = \left( \nu _{j} \right) \in  \mathbb{R} ^{3N}$ s.t. it fulfills the Hadamard product $\mathbf{v} = \mathbf{V} \circ \mathbf{n}$.
+
+Similarly, we define the mean curvature $\mathbf{H}  = ( H_{j})  \in  \mathbb{R} ^{N}  $ and the substitution variable
+$\mathbf{z} = \left( z_{j} \right) \in \mathbb{R} ^{3N}$. To simplify notation will we introduce the block structured vectors,\[
+\mathbf{u} = \begin{pmatrix}
+\mathbf{H} \\
+\mathbf{n}
+\end{pmatrix}
+\in \mathbb{R} ^{4N}
+\quad \text{and} \quad \mathbf{w} = \begin{pmatrix}
+\mathbf{V} \\
+\mathbf{z}
+\end{pmatrix}
+\in \mathbb{R} ^{4N}.
+\]
+
+Recall the basis functions, $\phi_{i} \left[ \mathbf{x} \right] \in S_{h}\left[ \mathbf{x} \right], \   i \in \mathcal{I}  $. We can then define the matrices \[
+\mathbf{M}\left( \mathbf{x} \right)_{i,j} =  \left( \phi _{i}\left[ \mathbf{x} \right], \phi_{j} \left[ \mathbf{x} \right] \right) _{ \Gamma _{h}},  \ \   i,j \in \mathcal{I}.
+\]
+and \[
+\mathbf{A}\left( \mathbf{x} \right)_{i,j} = \left( \nabla _{\Gamma _{h}} \phi _{i} \left[ \mathbf{x} \right], \nabla _{\Gamma _{h}}\phi _{j} \left[ \mathbf{x} \right]  \right)_{\Gamma _{h}}, \ \    i,j \in \mathcal{I}.
+\]
+We may also define the corresponding diagonal block matrices using the Kronecker product s.t.
+\[
+    \begin{split}
+        \mathbf{M}^{4}( \mathbf{x} )  &= I \otimes \mathbf{M}( \mathbf{x}) \in \mathbb{R} ^{4N \times 4N} \\
+\mathbf{A}^{4}( \mathbf{x} )   & = I \otimes \mathbf{A}( \mathbf{x}
+) \in \mathbb{R} ^{4N \times 4N}
+    \end{split}
+\]
+using the identity $I \in \mathbb{R} ^{4\times 4}$. Moreover, we can also define the matrices $\mathbf{F}_{1} \left( \mathbf{x}, \mathbf{u} \right) \in  \mathbb{R}^{N \times N} $, $\mathbf{F}_{2} \left( \mathbf{x}, \mathbf{u} \right) \in
+\mathbb{R}^{3N \times 3N} $  s.t.
+\[
+    \mathbf{F}_{1}\left( \mathbf{x},\mathbf{u} \right)_{i,j}    = - \left( \left\lvert A_{h} \right\rvert^2  \phi_{j} \left[ \mathbf{x} \right] , \phi_{i} \left[ \mathbf{x} \right]  \right)_{\Gamma _{h}},  \\
+\]
+where $i,j \in \mathcal{I}  $. Likewise we define,
+\[
+    \mathbf{F}_{2}\left( \mathbf{x},\mathbf{u} \right)_{i,j}    =  \left( (H_{h} A_{h} - A^2_{h})  \phi_{j} \left[ \mathbf{x} \right] , \phi_{i} \left[ \mathbf{x} \right]  \right)_{\Gamma _{h}},
+\]
+where the indices are $i,j = 1,\ldots, 3N$.
+\todo[inline]{ How do do the indexes exist for $i,j > N$?  } Again, the corresponding block matrix is on the form,
+\[
+\mathbf{F}\left( \mathbf{x}, \mathbf{u} \right) = \begin{pmatrix}
+\mathbf{F}_{1}( \mathbf{u}, \mathbf{x} ) &  0 \\
+0 &  \mathbf{F}_{2}(\mathbf{u}, \mathbf{x})
+\end{pmatrix}.
+\]
+
+Our goal now is to simplify the notation for the nonlinear functions. Let $\mathbf{f}_{2}( \mathbf{x}, \mathbf{u}) \in  \mathbb{R} ^{3N} $, $\mathbf{g}_{1}( \mathbf{x}, \mathbf{u}) \in \mathbb{R} ^{N} $ and $\mathbf{g}_{2}( \mathbf{x} , \mathbf{u})
+\in \mathbf{R}^{3N} $. We can first define the function
+
+\begin{equation*}
+    \begin{split}
+        \mathbf{f}_{2}( \mathbf{x}, \mathbf{u}&)_{j + (l-1)N} = ( ( \left\lvert \nabla _{\Gamma _{h}} H_{h} \right\rvert ^2 \nu _{h})_{l} , \phi_{j}\left[ \mathbf{x} \right]   ) _{\Gamma _{h}}   \\
+        & + ((A_{h}^2 \nabla _{\Gamma _{h}}H_{h})_{l}, \phi _{j} \left[ \mathbf{x} \right]  )_{\Gamma _{h}} \\
+        & + 2((A_{h} \nabla _{\Gamma _{h}} H_{h})\cdot \nabla _{\Gamma _{h}} \phi _{j} \left[ \mathbf{x} \right] , ( v_{h}) _{l})_{\Gamma _{h}} \\
+    & + \left((Q_{h})_{l},  ( \nabla _{\Gamma _{h}} )_{l} \phi_{j} \left[ \mathbf{x} \right]  \right)_{\Gamma _{h}} \\
+    &- \left(Q_{h} H_{h} ( v_{h}) _{l}, \phi _{j} \left[ \mathbf{x} \right]   \right)_{\Gamma_{h} },
+    \end{split}
+\end{equation*}
+
+for $j \in \mathcal{I} $ and $l = 1,2,3$. Similarly, we let
+\[
+    \begin{split}
+\mathbf{g}_{1}( \mathbf{x}, \mathbf{u}) _{j} & = \left( Q_{h}, \phi _{j}\left[ \mathbf{x} \right]  \right) _{\Gamma _{h}}, \\
+\mathbf{g}_{2}\left( \mathbf{x}, \mathbf{u} \right)_{j + (l-1)N} & = \left( \left\lvert A_{h} \right\rvert ^2 ( v_{h}) _{l}, \phi _{j} \left[ \mathbf{x} \right]  \right)     _{\Gamma _{h}},
+    \end{split}
+\]
+for $j \in \mathcal{I} $ and $l=1,2,3$.
+This can now be collected into the vectors $\mathbf{f}( \mathbf{x}, \mathbf{u}), \mathbf{g}(\mathbf{x},\mathbf{u} ) \in \mathbb{R} ^{4N}  $ s.t. \[
+\mathbf{f}( \mathbf{x}, \mathbf{u}) = \begin{pmatrix}
+0\\
+\mathbf{f}_{2}(\mathbf{x},\mathbf{u} )
+\end{pmatrix}
+, \ \ \mathbf{g} (\mathbf{x}, \mathbf{u})
+ = \begin{pmatrix}
+\mathbf{g}_{1}( \mathbf{x}, \mathbf{u}) \\
+\mathbf{g}_{2}( \mathbf{x}, \mathbf{u})
+\end{pmatrix}
+\]
+
+Finally, we can write the fully matrix-vector formulation of \eqref{eq:FEM}.
+
+\begin{subequations}
+\label{eq:WE_matrix_form}
+\begin{align}
+    \mathbf{M}^{4}( \mathbf{x}) \frac{d \mathbf{u}}{dt}    & = \mathbf{A}( \mathbf{x}) ^{4} \mathbf{w} +  \mathbf{F}( \mathbf{x}, \mathbf{u}) \mathbf{w} \nonumber  \\ & \quad  + \mathbf{f}( \mathbf{x}, \mathbf{u}),     \\
+   \mathbf{M}^{4}( \mathbf{x}) \mathbf{w}  & =- \mathbf{A}( \mathbf{x}) ^{4} \mathbf{u}+  \mathbf{g}( \mathbf{x}, \mathbf{u}), \\
+   \frac{d\mathbf{x}}{dt}  & = \mathbf{v}.
+\end{align}
+\end{subequations}
+Another observation is that the initial condition of $\mathbf{u}$ and $\mathbf{x}$  is easy to compute using the initial closed surface $\Gamma _{0}$. On the other hand, initial conditions for $\mathbf{w}$ has to be evaluated using \eqref{eq:WE_strong_form_V} and \eqref{eq:WE_strong_form_z}.
+
+
+
+\section{Further work}
+The final scheme described in \eqref{eq:WE_matrix_form} is not yet completely numerical solvable and still need some work, thus, implying that it is necessary to implement an nonlinear PDE-solver method, such as the Newton's method, to obtain a solution.
+
+Secondly, it also remains to find a proper method for time discretization. However, this should be reasonably straightforward by applying the implicit Euler scheme or more sophisticated standard methods such as the backward differential formulas or Runge-Kutta methods.
+
+If the numerical schemes above are provided, then the formulation should be reasonably possible to implement the problem using the modern finite element software framework NGSolve \cite{schoberl2017netgen}. In fact, recently it was shown that a modified formulation of \eqref{eq:FEM} could be solved using the same software library \cite{hu2022evolving}.
