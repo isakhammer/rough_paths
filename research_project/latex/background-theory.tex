@@ -18,5 +18,35 @@ Lets consider the parametrized smooth path of $d$ dimensions be $X_{t}: \left[ a
     S( X)_{a,t}^{i} =  \int_{a < s < t}^{} dX^{i} = X^{i}_{t} - X_{0}^{i}
 \end{equation}
 
+Similarly we define the double-iterated double integral \begin{equation*}
+    S( X)^{i,j}_{a,t} = \int_{a < s<t}^{} S( X)_{a,s}^{i}dX^{j}_{s} = \int_{\substack{a < r < t \\ a < s < t}}^{} dX^{i}_{r} dX^{j}_{s}
+\end{equation*}
 
 
+ Continuing recursively we obtain the definition \begin{equation*}
+     S( X) _{a,t}^{i_{1},\ldots, i_{k}} =  \int_{a < s <t}^{} S( X) ^{i_{1}, \ldots, i_{k-1}} dX^{i_{k}}_{s}
+ \end{equation*}
+ where $i_{1}, \ldots, i_{k} \in \left\{ 1, \ldots, d \right\} $. Notice that we still obtain the mapping $S( X)^{i_{1}, \ldots, i_{k}}: [a,b] \to \mathbb{R}  $.  Finally we have the tools rquired to define a signature.
+
+ \begin{definition}[Signature]
+     We say a signature of a path $X: \left[ a,b \right] \to  \mathbb{R} ^{d} $, denoted by $S( X) _{a,b}$ is the collection of all the iterated integrals of $X$. Thus we, nor have the sequence of numbers \begin{equation}
+     \begin{split}
+         S( X) _{a,b}  = & ( 1,  S( X) ^{1}_{a,b}, \ldots, S( X) ^{d}_{a,b}, S( X) ^{1,1}_{a,b}, \\ & \ \  S( X) ^{1,2} _{a,b}, S( X) _{a,b}^{2,1}, \ldots).
+     \end{split}
+     \end{equation}
+
+     Here the first term is defined as $1$. Keep in mind that we iterate over all multi-indexes, that is the set \begin{equation}
+W =\left\{
+         \begin{split}
+           ( i_{1}, \ldots, i_{k})  \text{ where }  k \ge 1, \\
+         \text{ for all } i_{1}, \ldots, i_{k} \in \left\{ 1,\ldots,d \right\} .
+         \end{split}
+\right\}
+     \end{equation}
+
+     We denote the set $W$ as words and $ A = \left\{ 1, \ldots, d \right\} $ as the alphabet of $d $ letters .
+ \end{definition}
+
+
+ One of the most fundemental properties of the signature is the invariance of time reparameterization. This can easily be demonstrated using the definitions of the path integral. Consider two paths $X,Y: \left[ a,b \right]  \to \mathbb{R} $ be two
+ real-valued paths and $ $
