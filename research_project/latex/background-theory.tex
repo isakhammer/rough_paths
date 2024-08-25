@@ -63,14 +63,14 @@ for any $i_{1},\ldots, i_{k} \in  \left\{ 1,\ldots,d \right\} $. Thus we see tha
 A fundamental property of the signature, first shown by Ree, is that the product of two signature terms \( S(X)_a^{i_1,\dots,i_k,b} \) and \( S(X)_a^{j_1,\dots,j_m,b} \) can be expressed as a sum of terms depending on shuffled multi-indexes.
 
 To formalize this, we define the shuffle product for two multi-indexes. A permutation \( \sigma \) of the set \( \{1, \dots, k+m\} \) is called a \((k,m)\)-shuffle if \( \sigma^{-1}(1) < \dots < \sigma^{-1}(k) \) and \( \sigma^{-1}(k+1) < \dots < \sigma^{-1}(k+m) \). The list \( (\sigma(1), \dots, \sigma(k+m)) \) forms a shuffle of \( (1, \dots, k) \) and \( (k+1, \dots, k+m) \). Let \( \text{Shuffles}(k,m) \) denote the collection of all such shuffles.
-% 
-For multi-indexes \( I = (i_1, \dots, i_k) \) and \( J = (j_1, \dots, j_m) \) with \( i_1, \dots, i_k, j_1, \dots, j_m \in \{1, \dots, d\} \), define the multi-index
-% \[
-% % I  J =  (\sigma(1), \dots, \sigma(k+m)) \mid \sigma \in \text{Shuffles}(k,m).
-% \]
-% The shuffle product \( I \shuffle J \) is the set of multi-indexes of length \( k+m \).
-% 
-% \textbf{Theorem (Shuffle product identity).} For a path \( X: [a,b] \to \mathbb{R}^d \) and multi-indexes \( I = (i_1, \dots, i_k) \) and \( J = (j_1, \dots, j_m) \), it holds that
-% \[
-% S(X)_a^b S(X)_a^b = \sum_{K \in I \shuffle J} S(X)_a^{K,b}.
-% \]
+
+% For multi-indexes \( I = (i_1, \dots, i_k) \) and \( J = (j_1, \dots, j_m) \) with \( i_1, \dots, i_k, j_1, \dots, j_m \in \{1, \dots, d\} \), define the multi-index
+\[
+% I  J =  (\sigma(1), \dots, \sigma(k+m)) \mid \sigma \in \text{Shuffles}(k,m).
+\]
+The shuffle product \( I \shuffle J \) is the set of multi-indexes of length \( k+m \).
+
+\textbf{Theorem (Shuffle product identity).} For a path \( X: [a,b] \to \mathbb{R}^d \) and multi-indexes \( I = (i_1, \dots, i_k) \) and \( J = (j_1, \dots, j_m) \), it holds that
+\[
+S(X)_a^b S(X)_a^b = \sum_{K \in I \shuffle J} S(X)_a^{K,b}.
+\]
