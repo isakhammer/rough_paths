@@ -82,3 +82,34 @@ Thus, we have that The shuffle product \( I \shuffle J \) is the set of multi-in
 S(X)_a^b S(X)_a^b = \sum_{K \in I \shuffle J} S(X)_a^{K,b}.
 \]
 \end{theorem}
+
+
+
+
+Let the terms $e_{i_{1}}, \ldots, e_{i_{k}} $ be monomials. Then we can denote the representation $S( X) _{a,b}$  as a formal power series \begin{equation}
+    \label{eq:representation}
+S(X )  _{a,b} = \sum_{k=0}^{\infty}  \sum_{i_{1},\ldots , i_{k}}^{} S( X) _{a,b}^{i_{1},\ldots, i_{k}} e_{i_{1}} \cdot \ldots\cdot e_{i_{k}}
+\end{equation}
+
+The main reason why this is fundamental is because this is necessary to state the so-called Chens identity which states the relationship between concatenation and tensor product. First we define the concatenation of paths. That is. For two paths $X: \left[ a,b \right] \to \mathbb{R} ^{d}$  and $Y : \left[ b,c \right]
+\to  \mathbb{R} ^{d}$, we define the concatenation as the path $X * Y : \left[ a,c \right]  \to \mathbb{R} ^{d}$, where the first part for $t \in  \left[ a,b \right] $ is $( X* Y) _{t} = X_{t}$, and for $t \in  \left[ b,c \right] $ we define $( X*Y)
+_{t} = X_{b} + ( Y_{t} - Y_{b}) $. And the tensor product is simply defined joining the monomials, that is  $e_{i_{1}} \ldots e_{i_{k}} \otimes e_{j_{1}} \ldots e_{j_{m}}  = e_{i_{1}} \ldots e_{i_{k}}  e_{j_{1}} \ldots e_{j_{m}}$. Finally we can
+state the relationship between these operators.
+
+\begin{theorem}
+    \textbf{Chens Identity.} Let $X: \left[ a,b \right] \to  \mathbb{R} ^{d}$ and $Y: \left[ b,c \right] \to \mathbb{R} ^{d}$ be two paths. Then we have the following identity,
+    \begin{equation}
+        S( X*Y) _{a,c} = S( X) _{a,b} \otimes  S( Y) _{b,c}
+    \end{equation}
+
+\end{theorem}
+
+
+A very interesting property with the signature \eqref{eq:representation} is in fact time-reversible. For a path $X: \left[ a,b \right]  \to \mathbb{R} ^{d}$ we can define the time-reverse path $\overleftarrow{X}: \left[ a,b \right]  \to  \mathbb{R} ^{d} $, for
+which $ \overleftarrow{X}  = X_{a+b -t}$. It can be shown that \begin{equation}
+    S( X) _{a,b} \otimes S( \overleftarrow{X}) = 1.
+\end{equation}
+This can be understood that that the time-reverse is the "tensor" inverse for the signature $S( X) _{a,b}$.
+
+
+
