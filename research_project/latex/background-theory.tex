@@ -112,23 +112,6 @@ which $ \overleftarrow{X}  = X_{a+b -t}$. It can be shown that \begin{equation}
 This can be understood that that the time-reverse is the "tensor" inverse for the signature $S( X) _{a,b}$.
 
 
-
-\subsection{Rough paths}%
-\label{sub:rough_paths}
-
-
-
-
-
-One of the key properties of the shuffle product is that it enables the representation of the signature of a nonlinear function as a linear combination of iterated integrals. Moreover, we observe that the time reversal property, Chen's identity, and the invariance of the signature under time reparametrizations are preserved.
-
-A natural question arises: what kind of information is captured by the signature?
-Due to the invariance of time reparametrization, it is clear that we cannot reconstruct exact speed at which the path is traversed \cite{chevyrev2016primer}.
-However, a another interesting propertie is that if we have a paramterized picture of a  path $X$ which never crossing itself, then we can completely describe the image and diraction of traversal of path. This implies that one can certainly
-reconstruct geometrical properties, see \cite{lyons2017hyperbolic, chang2019insertion, geng2017reconstruction}
-
-
-
 \subsection{Log signature}%
 \label{sub:log_signature}
 
@@ -150,9 +133,38 @@ It is clear that the first few terms of the log signature are given by
 \end{equation}
 
 
-\section{Signatures as data points and rough paths}%
-\label{sub:signatures_as_data_points_and_rough_paths}
+\subsection{Rough paths}%
+\label{sub:rough_paths}
 
+
+
+
+
+One of the key properties of the shuffle product is that it enables the representation of the signature of a nonlinear function as a linear combination of iterated integrals. Moreover, we observe that the time reversal property, Chen's identity, and the invariance of the signature under time reparametrizations are preserved.
+
+A natural question arises: what kind of information is captured by the signature?
+Due to the invariance of time reparametrization, it is clear that we cannot reconstruct exact speed at which the path is traversed \cite{chevyrev2016primer}.
+However, a another interesting propertie is that if we have a paramterized picture of a  path $X$ which never crossing itself, then we can completely describe the image and diraction of traversal of path. This implies that one can certainly
+reconstruct geometrical properties, see \cite{lyons2017hyperbolic, chang2019insertion, geng2017reconstruction}
+
+
+
+
+\section{The Signature Uniqueness Theorem}
+
+Recent work combines signature transforms from rough path theory with neural networks to tackle problems in data science (cf. \cite{LZL19}, \cite{WIN19}, \cite{XSJ17}). The central task is to learn the nonlinear relationship between an input data stream (a sequence of points in a vector space) and an output. For instance, atmospheric data from the last 24 hours could be used to predict weather for the next 24 hours.
+
+An input stream is naturally ordered, allowing it to be represented as a continuous path in a vector space \( V \). The signature transform \( S(x) \) maps a path \( x: [0, T] \to V \) to a sequence of global iterated integrals:
+\[
+S(x) = \left( \int_0^T \! dx_t \otimes dx_t, \, \int_0^{t_1} \cdots \int_0^{t_n} dx_{t_1} \otimes \cdots \otimes dx_{t_n}, \dots \right)
+\]
+In practice, a truncated signature \( S_N(x) \) is used as a feature set for learning the relationship between the path and output. This approach can leverage traditional statistical methods or deep learning techniques.
+
+The theoretical foundation of this approach is the \textit{signature uniqueness theorem}, which asserts that every rough path is uniquely determined by its signature, except for tree-like segments. This makes the signature a powerful tool for encoding all relevant information in the data stream. The effectiveness of this method is captured in two key properties:
+
+\textbf{Property 1.} The truncated signature \( S_N(x) \) converges to the full signature \( S(x) \) rapidly, even for moderate \( N \), ensuring minimal information loss.
+
+\textbf{Property 2.} Polynomial functions on the signature space are linear, as implied by the shuffle product formula (\cite{formula115}). Thus, lifting the problem to the signature space linearizes it, making the solution robust and model-free.
 
 
 
