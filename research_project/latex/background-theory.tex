@@ -129,9 +129,34 @@ reconstruct geometrical properties, see \cite{lyons2017hyperbolic, chang2019inse
 
 
 
+\subsection{Log signature}%
+\label{sub:log_signature}
 
 
-\subsection{Signatures as data points and rough paths}%
+For a path $X : [a, b] \mapsto \mathbb{R}^d$, the log signature of $X$ is defined as the formal power series $\log S(X)_{a,b}$.
+
+For two formal power series $x$ and $y$, let us define their Lie bracket by
+
+\begin{equation}
+[x, y] = x \otimes y - y \otimes x. \tag{1.55}
+\end{equation}
+
+It is clear that the first few terms of the log signature are given by
+
+\begin{equation}
+    \begin{split}
+\log&  S(X)_{a,b}  = \sum_{i=1}^{d} S(X)^i_{a,b} e_i \\  &+ \sum_{1 \leq i < j \leq d} \frac{1}{2} \left( S(X)^{i,j}_{a,b}  - S(X)^{j,i}_{a,b} \right) [e_i, e_j] \\ &  + \dots .
+    \end{split}
+\end{equation}
+
+
+\section{Signatures as data points and rough paths}%
 \label{sub:signatures_as_data_points_and_rough_paths}
+
+
+
+
+
+
 
 
