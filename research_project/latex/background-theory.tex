@@ -38,10 +38,10 @@ Similarly we define the double-iterated double integral \begin{equation*}
 
      Here the first term is defined as $1$. Keep in mind that we iterate over all multi-indexes, that is the set \begin{equation}
 W =\left\{
-         \begin{split}
+         \begin{aligned}
            ( i_{1}, \ldots, i_{k})  \text{ where }  k \ge 1, \\
          \text{ for all } i_{1}, \ldots, i_{k} \in \left\{ 1,\ldots,d \right\} .
-         \end{split}
+         \end{aligned}
 \right\}
      \end{equation}
 
@@ -116,9 +116,7 @@ This can be understood that that the time-reverse is the "tensor" inverse for th
 \label{sub:log_signature}
 
 
-For a path $X : [a, b] \mapsto \mathbb{R}^d$, the log signature of $X$ is defined as the formal power series $\log S(X)_{a,b}$.
-
-For two formal power series $x$ and $y$, let us define their Lie bracket by
+For a path $X : [a, b] \mapsto \mathbb{R}^d$, the log signature of $X$ is defined as the formal power series $\log S(X)_{a,b}$. For two formal power series $x$ and $y$, let us define their Lie bracket by
 
 \begin{equation}
 [x, y] = x \otimes y - y \otimes x. \tag{1.55}
@@ -127,10 +125,15 @@ For two formal power series $x$ and $y$, let us define their Lie bracket by
 It is clear that the first few terms of the log signature are given by
 
 \begin{equation}
-    \begin{split}
+    \begin{aligned}
 \log&  S(X)_{a,b}  = \sum_{i=1}^{d} S(X)^i_{a,b} e_i \\  &+ \sum_{1 \leq i < j \leq d} \frac{1}{2} \left( S(X)^{i,j}_{a,b}  - S(X)^{j,i}_{a,b} \right) [e_i, e_j] \\ &  + \dots .
-    \end{split}
+    \end{aligned}
 \end{equation}
+As we can see, the log signature is a compressed form of the signature, which is more complicated to define. For the same amount (number of levels) of the signature, the log signature contains the same information in fewer numbers. The link between the two is continuous.
+
+The log signature is a compressed version of the signature, which has a more intricate definition. For the same number of levels, the log signature retains the same information but with fewer terms. The relationship between the two is continuous.
+
+Specifically for log signatures it is important to consider the structure of Free Lie Algebras. For examples where the log signatures is computed efficiently, see \cite{reizenstein2020algorithm, reizenstein2017calculation}.
 
 
 \subsection{Rough paths}%
@@ -157,12 +160,12 @@ An advantage of this extra theory is that it is generalized and can handle not o
 
 Given that an input stream is naturally ordered, it can be represented as a continuous path in some vector space. Following \cite{geng2021introduction}, the signature transform \( S(X) \) maps a path \( X: [0, T] \to \mathbb{R}^d \) to a sequence of  iterated integrals:
 \[
-  S(X) = \left(  \begin{split}
+  S(X) = \left(  \begin{aligned}
  & X_{T} - X_{0},    \\
    &   \int_0^T \! dX_s \otimes dX_t, \\
  & \int_0^{t_1} \cdots \int_0^{t_n} dX_{t_1} \otimes \cdots \otimes dX_{t_n}, \\
   & \dots
-    \end{split}\right)
+    \end{aligned}\right)
 \]
 In practice, a truncated signature \( S_N(x) \) is used as a feature set for learning the relationship between the path and output. This approach can leverage traditional statistical methods or deep learning techniques.
 
