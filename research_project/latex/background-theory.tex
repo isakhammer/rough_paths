@@ -78,9 +78,10 @@ Thus, we have that The shuffle product \( I \shuffle J \) is the set of multi-in
 
 \begin{theorem}
 \textbf{Shuffle product identity} For a path \( X: [a,b] \to \mathbb{R}^d \) and multi-indexes \( I = (i_1, \dots, i_k) \) and \( J = (j_1, \dots, j_m) \), it holds that
-\[
+\begin{equation}
+    \label{eq:shuffle}
 S(X)_a^b S(X)_a^b = \sum_{K \in I \shuffle J} S(X)_a^{K,b}.
-\]
+\end{equation}
 \end{theorem}
 
 
@@ -137,14 +138,11 @@ It is clear that the first few terms of the log signature are given by
 \label{sub:rough_paths}
 
 
-
-
-
 One of the key properties of the shuffle product is that it enables the representation of the signature of a nonlinear function as a linear combination of iterated integrals. Moreover, we observe that the time reversal property, Chen's identity, and the invariance of the signature under time reparametrizations are preserved.
 
 A natural question arises: what kind of information is captured by the signature?
 Due to the invariance of time reparametrization, it is clear that we cannot reconstruct exact speed at which the path is traversed \cite{chevyrev2016primer}.
-However, a another interesting propertie is that if we have a paramterized picture of a  path $X$ which never crossing itself, then we can completely describe the image and diraction of traversal of path. This implies that one can certainly
+However, a another interesting property that if we have a paramterized picture of a path $X$ which never crossing itself, then we can completely describe the image and direction of traversal of path. This implies that one can certainly
 reconstruct geometrical properties, see \cite{lyons2017hyperbolic, chang2019insertion, geng2017reconstruction}
 
 
@@ -152,19 +150,62 @@ reconstruct geometrical properties, see \cite{lyons2017hyperbolic, chang2019inse
 
 \section{The Signature Uniqueness Theorem}
 
-Recent work combines signature transforms from rough path theory with neural networks to tackle problems in data science (cf. \cite{LZL19}, \cite{WIN19}, \cite{XSJ17}). The central task is to learn the nonlinear relationship between an input data stream (a sequence of points in a vector space) and an output. For instance, atmospheric data from the last 24 hours could be used to predict weather for the next 24 hours.
+Recent work combines signature transforms from rough path theory with neural networks to tackle problems in data science \cite{fermanian2023new, cass2024lecture}. The central task is to learn the nonlinear relationship between an input data stream (a sequence of points in a vector space)
+and an output.
+For instance, this implies predicting the behavior of a dynamical system 2 hours in advance, based on a time series of data from the previous 2 hours.
+In this section, we will define the motivation and state the signature uniqueness theorem. A challenge with this section is that we will skip many definitions, as rough paths theory is a highly mathematical field. For further details, see \cite{boedihardjo2016signature}.
 
-An input stream is naturally ordered, allowing it to be represented as a continuous path in a vector space \( V \). The signature transform \( S(x) \) maps a path \( x: [0, T] \to V \) to a sequence of global iterated integrals:
+An input stream is naturally ordered, allowing it to be represented as a continuous path some vector space. Following \cite{geng2021introduction}, the signature transform \( S(X) \) maps a path \( X: [0, T] \to \mathbb{R} ^{d} \) to a sequence of global iterated integrals:
 \[
-S(x) = \left( \int_0^T \! dx_t \otimes dx_t, \, \int_0^{t_1} \cdots \int_0^{t_n} dx_{t_1} \otimes \cdots \otimes dx_{t_n}, \dots \right)
+  S(X) = \left(  \begin{split}
+ & X_{T} - X_{0},    \\
+   &   \int_0^T \! dX_s \otimes dX_t, \\
+ & \int_0^{t_1} \cdots \int_0^{t_n} dX_{t_1} \otimes \cdots \otimes dX_{t_n}, \\
+  & \dots
+    \end{split}\right)
 \]
 In practice, a truncated signature \( S_N(x) \) is used as a feature set for learning the relationship between the path and output. This approach can leverage traditional statistical methods or deep learning techniques.
 
 The theoretical foundation of this approach is the \textit{signature uniqueness theorem}, which asserts that every rough path is uniquely determined by its signature, except for tree-like segments. This makes the signature a powerful tool for encoding all relevant information in the data stream. The effectiveness of this method is captured in two key properties:
 
-\textbf{Property 1.} The truncated signature \( S_N(x) \) converges to the full signature \( S(x) \) rapidly, even for moderate \( N \), ensuring minimal information loss.
+\begin{itemize}
+    \item \textbf{Property 1.} The truncated signature \( S_N(x) \) converges to the full signature \( S(x) \) rapidly, even for moderate \( N \), ensuring minimal information loss.
 
-\textbf{Property 2.} Polynomial functions on the signature space are linear, as implied by the shuffle product formula (\cite{formula115}). Thus, lifting the problem to the signature space linearizes it, making the solution robust and model-free.
+    \item \textbf{Property 2.} Polynomial functions on the signature space are linear, as implied by the shuffle product identity \eqref{eq:shuffle} . Thus, lifting the problem to the signature space linearises it, making the solution robust and model-free.
+\end{itemize}
+
+
+It is worth mentioning that it is easy to go down the rabbit hole of defining rough paths rigorously; however, to state the theorem, we still need some technical details about three structures and weakly geometric rough paths.
+
+Let us we define some essential tree structures.
+e say a \textit{real tree} is a metric space $(\mathcal{T}, \rho)$ in which any two distinct points can be joined by a unique continuous, non-self-intersecting path.
+
+From the definition, it is clear that a real tree does not contain non-degenerate loops (i.e. subspaces homeomorphic to the circle). Tree-like paths are defined to be paths that can be realised as loops on a real tree (hence they must possess the aforementioned self-cancelling property).
+
+
+Now, let $X : [0, T] \to V$ be a continuous path in some topological space $V$. We say that $X$ is \textit{tree-like}, if there exist a real tree $\mathcal{T}$ together with continuous mappings
+\[
+\phi : [0, T] \to \mathcal{T}, \quad \psi : \mathcal{T} \to V
+\]
+such that $\phi(0) = \phi(T)$ and $x = \psi \circ \phi$. A \textit{tree-like piece} of a continuous path $x$ is a portion $[s, t]$ such that $X\mid_{[s,t]}$ is tree-like. We say that $X$ is \textit{tree-reduced} if it does not contain any tree-like pieces.
+
+
+The signature uniqueness theorem can now be stated as follows. It was first
+proved by \cite{boedihardjo2016signature}.
+
+
+Let $\alpha \in (0,1]$ be given fixed and denote $N_{\alpha} \triangleq \lfloor 1/\alpha \rfloor$ (the integer part of $1/\alpha$). In addition, let $\Delta _{T} = \left\{ ( s,t) : 0 \le t \le T \right\} $ be some time interval for variables $s $
+and $t$. Let the truncated tensor algebra over the Banach space $V$ as $T^{N}( V) = \bigotimes_{n= 0} ^{N} V^{ \otimes n}  $.     An $\alpha$-Hölder rough path over $V$ is a multiplicative functional $X : \Delta_T \to T_{}^N(V)$ that is $\alpha$-Hölder continuous in the following sense:
+\[
+\|X^n\|_{\alpha} \triangleq \sup_{0 \leq s < t \leq T} \frac{|X_{s,t}^n|}{(t-s)^{n\alpha}} < \infty, \quad \text{for each } n = 1, \cdots, N_{\alpha}.
+\]
+
+
+
+\begin{theorem}
+\textbf{Signature uniqueness theorem.}
+Let $X$ be a weakly geometric rough path in a Banach space $V$. Then $X$ has trivial signature if and only if $t \mapsto X_{0,t}$ is tree-like. As a result, two weakly geometric rough paths $X, Y$ have the same signature if and only if they are equal up to tree-like pieces.
+\end{theorem}
 
 
 
