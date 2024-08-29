@@ -1,4 +1,6 @@
-# Small research project:  Signatures and its application to rough path theory
+# Small research project
+
+## Signatures and its application to rough path theory
 
 ### Abstract 
 Signatures have emerged as a powerful tool in machine learning, particularly for efficiently capturing key geometric features of data. In this report, we introduce the foundational concepts of signatures, outlining their essential
