@@ -1,0 +1,222 @@
+
+
+\subsection{Signatures}%
+\label{sec:background}
+
+
+The concept of the signature approach is to extract characteristic features from a data, that is a function or data points in a non parametric way.
+First we want to define the so-called path integral.
+Consider a two parameterized one dimensional paths  $Y_{t}: [a,b] \to  \mathbb{R} ^{d} $ and $X_t: [a,b] \to \mathbb{R} $, then we say the path integral of $Y_{t}$ against $X_{t}$  is \begin{equation}
+    \int_{a}^{b} Y_{t} dX_{t} = \int_{a}^{b}  Y_{t} \dot{X_{t}}dt,
+\end{equation}  where we defined $ \dot{X_{t}} = \frac{d}{dt}X( t)   $. Following \cite{Reizenstein2016} and  \cite{chevyrev2016primer}, will we explain the basic definition of a signature.
+
+
+
+A fundamental piece in the definition of a signature is
+the so-called path integral.
+Lets consider the parametrized smooth path of $d$ dimensions be $X_{t}: \left[ a,b \right] \to  \mathbb{R} ^{d}  $ such that $X_{t} = \left\{ X^{1}_{t},  X_{t}^{2}, \ldots, X_{t}^{d} \right\} $. Now since each path is $X^{i}_{t}: [a,b] \to
+\mathbb{R} $ for $i \in \left\{ 1, \ldots, d \right\} $ , we say define the integral \begin{equation}
+    S( X)_{a,t}^{i} =  \int_{a < s < t}^{} dX^{i} = X^{i}_{t} - X_{0}^{i}
+\end{equation}
+
+Similarly we define the double-iterated double integral \begin{equation*}
+    S( X)^{i,j}_{a,t} = \int_{a < s<t}^{} S( X)_{a,s}^{i}dX^{j}_{s} = \int_{\substack{a < r < t \\ a < s < t}}^{} dX^{i}_{r} dX^{j}_{s}
+\end{equation*}
+
+
+ Continuing recursively we obtain the definition \begin{equation*}
+     S( X) _{a,t}^{i_{1},\ldots, i_{k}} =  \int_{a < s <t}^{} S( X) ^{i_{1}, \ldots, i_{k-1}} dX^{i_{k}}_{s}
+ \end{equation*}
+ where $i_{1}, \ldots, i_{k} \in \left\{ 1, \ldots, d \right\} $. Notice that we still obtain the mapping $S( X)^{i_{1}, \ldots, i_{k}}: [a,b] \to \mathbb{R}  $.  Finally we have the tools rquired to define a signature.
+
+ \begin{definition}[Signature]
+     We say a signature of a path $X: \left[ a,b \right] \to  \mathbb{R} ^{d} $, denoted by $S( X) _{a,b}$ is the collection of all the iterated integrals of $X$. Thus we, nor have the sequence of numbers \begin{equation}
+     \begin{split}
+         S( X) _{a,b}  = & ( 1,  S( X) ^{1}_{a,b}, \ldots, S( X) ^{d}_{a,b}, S( X) ^{1,1}_{a,b}, \\ & \ \  S( X) ^{1,2} _{a,b}, S( X) _{a,b}^{2,1}, \ldots).
+     \end{split}
+     \end{equation}
+
+     Here the first term is defined as $1$. Keep in mind that we iterate over all multi-indexes, that is the set \begin{equation}
+W =\left\{
+         \begin{aligned}
+           ( i_{1}, \ldots, i_{k})  \text{ where }  k \ge 1, \\
+         \text{ for all } i_{1}, \ldots, i_{k} \in \left\{ 1,\ldots,d \right\} .
+         \end{aligned}
+\right\}
+     \end{equation}
+
+     We denote the set $W$ as words and $ A = \left\{ 1, \ldots, d \right\} $ as the alphabet of $d $ letters .
+ \end{definition}
+
+
+One of the most fundamental properties of the signature is its invariance under time reparameterization. This can easily be demonstrated using the definitions of the path integral. Consider two paths $X,Y: \left[ a,b \right] \to \mathbb{R}$, which
+are real-valued. Now, consider two corresponding reparameterized paths $\widetilde{X}, \widetilde{Y}: \left[ a,b \right] \to \mathbb{R}$, where $\widetilde{X}_{t} = X_{\psi(t)}$ and $\widetilde{Y} = Y_{\psi(t)}$, with some smooth reparameterization $\psi: [a,b]
+\to [a,b]$. From the chain rule it is clear that $$\frac{d}{dt} \widetilde{X}_{ t } = \dot{ \widetilde{X}_{ t }}  \dot{ \psi} ( t)  $$, thus it follows that \begin{equation}
+    \int_{a}^{b }  \widetilde{Y}_{t} d\widetilde{X}_{t} = \int_{a}^{b}  Y_{\psi ( t) }\dot{X} _{\psi ( t) } \dot{\psi}( t) = \int_{a}^{b}  Y_{u} dX_{u}
+\end{equation}
+
+Here we used the subsitution $u = \psi ( t)  $. This is of course applicable in the multidimensional case in the case of a signature. Let $\widetilde{X},X: \left[ a,b \right] \to \mathbb{R} d$ where $\widetilde{X}_{t} = X_{t}$.Then we see that \begin{equation}
+    S( \widetilde{X}) _{a,b}^{i_{1},\ldots, i_{k}} = S( X) ^{i_{1},\ldots, i_{k}}_{a,b}
+\end{equation}
+
+for any $i_{1},\ldots, i_{k} \in  \left\{ 1,\ldots,d \right\} $. Thus we see that the signature is, in fact, invariant under time re parameterization.
+
+\subsection{Shuffle product}%
+\label{sub:shuffle_product}
+
+
+A fundamental property of the signature is that the product of two signature terms \( S(X)_a^{i_1,\dots,i_k,b} \) and \( S(X)_a^{j_1,\dots,j_m,b} \) can be expressed as a sum of terms depending on shuffled multi-indexes.
+
+To formalize this, we define the shuffle product for two multi-indexes. A permutation \( \sigma \) of the set \( \{1, \dots, k+m\} \) is called a \((k,m)\)-shuffle if \( \sigma^{-1}(1) < \dots < \sigma^{-1}(k) \) and \( \sigma^{-1}(k+1) < \dots < \sigma^{-1}(k+m) \). The list \( (\sigma(1), \dots, \sigma(k+m)) \) forms a shuffle of \( (1, \dots, k) \) and \( (k+1, \dots, k+m) \). Let \( \text{Shuffles}(k,m) \) denote the collection of all such shuffles.
+
+For multi-indexes \( I = (i_1, \dots, i_k) \) and \( J = (j_1, \dots, j_m) \) with \( i_1, \dots, i_k, j_1, \dots, j_m \in \{1, \dots, d\} \), define the multi-index
+\[
+ I \shuffle J =\left\{   (\sigma(1), \dots, \sigma(k+m)) \mid \sigma \in \text{Shuffles}(k,m) \right\} .
+\]
+Thus, we have that The shuffle product \( I \shuffle J \) is the set of multi-indexes of length \( k+m \).
+
+\begin{theorem}
+\textbf{Shuffle product identity} For a path \( X: [a,b] \to \mathbb{R}^d \) and multi-indexes \( I = (i_1, \dots, i_k) \) and \( J = (j_1, \dots, j_m) \), it holds that
+\begin{equation}
+    \label{eq:shuffle}
+S(X)_a^b S(X)_a^b = \sum_{K \in I \shuffle J} S(X)_a^{K,b}.
+\end{equation}
+\end{theorem}
+
+
+Let the terms $e_{i_{1}}, \ldots, e_{i_{k}} $ be monomials. Then we can denote the representation $S( X) _{a,b}$  as a formal power series \begin{equation}
+    \label{eq:representation}
+S(X )  _{a,b} = \sum_{k=0}^{\infty}  \sum_{i_{1},\ldots , i_{k}}^{} S( X) _{a,b}^{i_{1},\ldots, i_{k}} e_{i_{1}} \cdot \ldots\cdot e_{i_{k}}
+\end{equation}
+
+The main reason why this is fundamental is because this is necessary to state the so-called Chens identity which states the relationship between concatenation and tensor product. First we define the concatenation of paths. That is. For two paths $X: \left[ a,b \right] \to \mathbb{R} ^{d}$  and $Y : \left[ b,c \right]
+\to  \mathbb{R} ^{d}$, we define the concatenation as the path $X * Y : \left[ a,c \right]  \to \mathbb{R} ^{d}$, where the first part for $t \in  \left[ a,b \right] $ is $( X* Y) _{t} = X_{t}$, and for $t \in  \left[ b,c \right] $ we define $( X*Y)
+_{t} = X_{b} + ( Y_{t} - Y_{b}) $. And the tensor product is simply defined joining the monomials, that is  $e_{i_{1}} \ldots e_{i_{k}} \otimes e_{j_{1}} \ldots e_{j_{m}}  = e_{i_{1}} \ldots e_{i_{k}}  e_{j_{1}} \ldots e_{j_{m}}$. Finally we can
+state the relationship between these operators.
+
+\begin{theorem}
+    \textbf{Chens Identity.} Let $X: \left[ a,b \right] \to  \mathbb{R} ^{d}$ and $Y: \left[ b,c \right] \to \mathbb{R} ^{d}$ be two paths. Then we have the following identity,
+    \begin{equation}
+        S( X*Y) _{a,c} = S( X) _{a,b} \otimes  S( Y) _{b,c}
+    \end{equation}
+
+\end{theorem}
+
+
+A very interesting property with the signature \eqref{eq:representation} is in fact time-reversible. For a path $X: \left[ a,b \right]  \to \mathbb{R} ^{d}$ we can define the time-reverse path $\overleftarrow{X}: \left[ a,b \right]  \to  \mathbb{R} ^{d} $, for
+which $ \overleftarrow{X}  = X_{a+b -t}$. It can be shown that \begin{equation}
+    S( X) _{a,b} \otimes S( \overleftarrow{X}) = 1.
+\end{equation}
+This can be understood that that the time-reverse is the "tensor" inverse for the signature $S( X) _{a,b}$.
+
+
+\subsection{Log signature}%
+\label{sub:log_signature}
+
+
+For a path $X : [a, b] \mapsto \mathbb{R}^d$, the log signature of $X$ is defined as the formal power series $\log S(X)_{a,b}$. For two formal power series $x$ and $y$, let us define their Lie bracket by
+
+\begin{equation}
+[x, y] = x \otimes y - y \otimes x. \tag{1.55}
+\end{equation}
+
+It is clear that the first few terms of the log signature are given by
+
+\begin{equation}
+    \begin{aligned}
+\log&  S(X)_{a,b}  = \sum_{i=1}^{d} S(X)^i_{a,b} e_i \\  &+ \sum_{1 \leq i < j \leq d} \frac{1}{2} \left( S(X)^{i,j}_{a,b}  - S(X)^{j,i}_{a,b} \right) [e_i, e_j] \\ &  + \dots .
+    \end{aligned}
+\end{equation}
+As we can see, the log signature is a compressed form of the signature, which is more complicated to define. For the same amount (number of levels) of the signature, the log signature contains the same information in fewer numbers. The link between the two is continuous.
+
+The log signature is a compressed version of the signature, which has a more intricate definition. For the same number of levels, the log signature retains the same information but with fewer terms. The relationship between the two is continuous.
+
+Specifically for log signatures it is important to consider the structure of Free Lie Algebras. For examples where the log signatures is computed efficiently, see \cite{reizenstein2020algorithm, reizenstein2017calculation}.
+
+
+\subsection{Reconstructing Geometric Properties from the signature}%
+\label{sub:rough_paths}
+
+
+One of the key properties of the shuffle product is that it enables the representation of the signature of a nonlinear function as a linear combination of iterated integrals. Moreover, we observe that the time reversal property, Chen's identity, and the invariance of the signature under time reparametrizations are preserved.
+
+A natural question arises: what kind of information is captured by the signature?
+Due to the invariance of time reparametrization, it is clear that we cannot reconstruct exact speed at which the path is traversed \cite{chevyrev2016primer}.
+However, a another interesting property that if we have a paramterized picture of a path $X$ which never crossing itself, then we can completely describe the image and direction of traversal of path. This implies that one can certainly
+reconstruct geometrical properties, see \cite{lyons2017hyperbolic, chang2019insertion, geng2017reconstruction}
+
+
+
+
+\section{Rough Paths and The Signature Uniqueness Theorem}
+
+Recent work combines signature transforms from rough path theory with neural networks to tackle problems in data science \cite{fermanian2023new, cass2024lecture}. The central task is to learn the nonlinear relationship between an input data stream (a sequence of points in a vector space)
+and an output.
+For instance, this implies predicting the behavior of a dynamical system 2 hours in advance, based on a time series of data from the previous 2 hours.
+In this section, we will define the motivation and state the signature uniqueness theorem. A challenge with this section is that we will skip many definitions, as rough paths theory is a highly mathematical field. For further details, see \cite{boedihardjo2016signature}.
+An advantage of this extra theory is that it is generalized and can handle not only Brownian motion but also semimartingales, Markov processes, and Gaussian processes.
+
+Given that an input stream is naturally ordered, it can be represented as a continuous path in some vector space. Following \cite{geng2021introduction}, the signature transform \( S(X) \) maps a path \( X: [0, T] \to \mathbb{R}^d \) to a sequence of  iterated integrals:
+\[
+  S(X) = \left(  \begin{aligned}
+ & X_{T} - X_{0},    \\
+   &   \int_0^T \! dX_s \otimes dX_t, \\
+ & \int_0^{t_1} \cdots \int_0^{t_n} dX_{t_1} \otimes \cdots \otimes dX_{t_n}, \\
+  & \dots
+    \end{aligned}\right)
+\]
+In practice, a truncated signature \( S_N(x) \) is used as a feature set for learning the relationship between the path and output. This approach can leverage traditional statistical methods or deep learning techniques.
+
+The theoretical foundation of this approach is the \textit{signature uniqueness theorem}, which asserts that every rough path is uniquely determined by its signature, except for tree-like segments. This makes the signature a powerful tool for encoding all relevant information in the data stream. The effectiveness of this method is captured in two key properties:
+
+\begin{itemize}
+    \item \textbf{Property 1.} The truncated signature \( S_N(x) \) converges to the full signature \( S(x) \) rapidly, even for moderate \( N \), ensuring minimal information loss.
+
+    \item \textbf{Property 2.} Polynomial functions on the signature space are linear, as implied by the shuffle product identity \eqref{eq:shuffle} . Thus, lifting the problem to the signature space linearises it, making the solution robust and model-free.
+\end{itemize}
+
+
+It is worth mentioning that it is easy to go down the rabbit hole of defining rough paths rigorously; however, to state the theorem, we still need some technical details about three structures and weakly geometric rough paths.
+
+Let us we define some essential tree structures.
+e say a \textit{real tree} is a metric space $(\mathcal{T}, \rho)$ in which any two distinct points can be joined by a unique continuous, non-self-intersecting path.
+
+From the definition, it is clear that a real tree does not contain non-degenerate loops (i.e. subspaces homeomorphic to the circle). Tree-like paths are defined to be paths that can be realised as loops on a real tree (hence they must possess the aforementioned self-cancelling property).
+
+
+Now, let $X : [0, T] \to V$ be a continuous path in some topological space $V$. We say that $X$ is \textit{tree-like}, if there exist a real tree $\mathcal{T}$ together with continuous mappings
+\[
+\phi : [0, T] \to \mathcal{T}, \quad \psi : \mathcal{T} \to V
+\]
+such that $\phi(0) = \phi(T)$ and $x = \psi \circ \phi$. A \textit{tree-like piece} of a continuous path $x$ is a portion $[s, t]$ such that $X\mid_{[s,t]}$ is tree-like. We say that $X$ is \textit{tree-reduced} if it does not contain any tree-like pieces.
+
+
+The signature uniqueness theorem can now be stated as follows. It was first
+proved by \cite{boedihardjo2016signature}.
+
+
+Let $\alpha \in (0,1]$ be given fixed and denote $N_{\alpha} \triangleq \lfloor 1/\alpha \rfloor$ (the integer part of $1/\alpha$). In addition, let $\Delta _{T} = \left\{ ( s,t) : 0 \le t \le T \right\} $ be some time interval for variables $s $
+and $t$. Let the truncated tensor algebra over the Banach space $V$ as $T^{N}( V) = \bigotimes_{n= 0} ^{N} V^{ \otimes n}  $.     An $\alpha$-Hölder rough path over $V$ is a multiplicative functional $X : \Delta_T \to T_{}^N(V)$ that is $\alpha$-Hölder continuous in the following sense:
+\[
+\|X^n\|_{\alpha} =  \sup_{0 \leq s < t \leq T} \frac{|X_{s,t}^n|}{(t-s)^{n\alpha}} < \infty, \quad \text{for each } n = 1, \cdots, N_{\alpha}.
+\]
+
+Utilizing this definition we cane define a suitable metric for rough paths. Consider $X_{}$ and $\widetilde{X}$ to be $\alpha$-Hölder continuous, the we define the following metric \begin{equation}
+\rho _{\alpha }( X, \widetilde{X})  = \sum_{n=1}^{N_{\alpha }} \sup_{0 \le s < t \le T  } \frac{| X_{s,t}^{n} - \widetilde{X}_{s,t}^{n}  |   }{( t -s)^{n\alpha } }.
+\end{equation}
+
+Finally, the space of $\alpha$-Hölder continuous rough path $X: \Delta _{T} \to  V$ is geometric if there exists a sequence of $\alpha$-Hölder continuous rough paths $X^{m} : \Delta _{T} \to  V $ with total variation such that \begin{equation}
+    \rho ( X^{m}, X) \to  0  \text{ as } m \to \infty
+\end{equation}
+
+
+
+\begin{theorem}
+\textbf{Signature uniqueness theorem.}
+Let $X$ be a weakly geometric rough path in a Banach space $V$. Then $X$ has trivial signature if and only if $t \mapsto X_{0,t}$ is tree-like. As a result, two weakly geometric rough paths $X, Y$ have the same signature if and only if they are equal up to tree-like pieces.
+\end{theorem}
+
+For more details, see \cite{boedihardjo2016signature, hambly2010uniqueness, geng2015signature, geng2017reconstruction}. This theorem is quite interesting since it proves that for a bounded variation path $X$ , then the signature is $S( X) = 1 $ if and only if x is tree-like.
+
+
+
