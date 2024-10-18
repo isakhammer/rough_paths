@@ -51,7 +51,7 @@ Isak Hammer$^{\star\dagger}$  \\
 % Why do mathematical theories developed centuries ago often find practical applications only much later? Historically, many mathematical concepts—such as non-Euclidean geometry or number theory—were developed without immediate practical use but later became fundamental to advances in fields like physics, engineering, and cryptography. Does society benefit from such delayed applicability, or does this raise questions about the necessity of theoretical work that may not have immediate applications? Should we, as a society, prioritize funding for such long-term research?
 \end{abstract}
 
-\section{Introduction}\label{sec:introduction}
+\section{Quick history of theoretical mathematics}\label{sec:introduction}
 
 Theoretical mathematics has been a essential subject throughout history, with significant implications for society both from art, curiosity and applications.
 
@@ -83,13 +83,30 @@ Around the same era, Chinese mathematicians developed a theory of additions, sub
 
 This was later optimized by the Hindu-Arabic mathematicians numeral system, which is now known as the numbers $0-9$ we used today invented in the early 770s, which proved to be essential to develop a consistent theory of arithmetic
 operations, including decimal numbers \cite{kunitzsch2003transmission}.
-This concept was quickly adopted by professional mathematicians, including Al-Khwarizmi (ca. 780–850) at the 'House of Wisdom' in Baghdad, which is renowned for its development of algebratic theory for solving quadratic equations of the form $ax^{2}
-+ bx + c = 0$, where $a$, $b$, and $c$ are positive integers, produce accurate tables for $\sin(x)$  and $\cos(x)$, and lastly big tables describing the movement of the sun, the moon and the five known planets \cite{van2013history}.
+This concept was quickly adopted by professional mathematicians, including Al-Khwarizmi (ca. 780–850) at the 'House of Wisdom' in Baghdad, which is renowned for its development of algebratic theory for solving quadratic equations of the form $$ax^{2}
++ bx + c = 0$$, where $a$, $b$, and $c$ are positive integers and $x$ is a unknown, produce accurate tables for $\sin(x)$  and $\cos(x)$, and lastly big tables describing the movement of the sun, the moon and the five known planets \cite{van2013history}.
 
 
+This was eventually the basis needed for the enlightenment mathematicians in the 16th Century, such as Newton and Leibniz. In fact, this stated curiosities about infinity, which later gave some obscure relationships between of a specific
+infinitely sequence of fractions and trigonometry.
+\begin{equation}
+    \frac{\pi}{4} = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{9}- \ldots
+\end{equation}
+which is the famous so-called Leibniz formula for $\pi $.
 
+While exploring the mysterious behavior of functions and sequences as variables approached infitinity, it opened up the concept of the infinitesimal. This quest ultimately led to the development of the derivative, formalized by the following limit:
+\begin{equation}
+    \frac{d}{dx} f(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}.
+\end{equation}
+In this expression, the derivative captures the instantaneous rate of change of \( f(x) \), as the small increment \( h \) approaches zero, allowing for a precise understanding of how functions behave at every point.
+As a scientific curiosity, this exploration unveiled the geometric relationships among acceleration, velocity, and position:
+\begin{equation} \begin{split}
+\frac{d}{dt} v(t) & = \lim_{h \to 0} \frac{p(t+h) - p(t)}{h}, \\
+\frac{d}{dt} a(t) & = \lim_{h \to 0} \frac{v(t+h) - v(t)}{h},
+\end{split} \end{equation}
+ enabling to relate the position of an object to its acceleration. This was a fundamental tool, as it became the fundamental language of physics, which later was a precursor industrial revolution and more.
 
-
+What is interesting in this story is that many of the big names, namely, did the mathematics for pure curiousty, but eventually it became a tool for industrial revolution. While this has totally overall sequation 
 
 
 \newpage
