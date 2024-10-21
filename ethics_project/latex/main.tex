@@ -9,6 +9,7 @@
 
 \usepackage{isaks_template} % Contains all included packages. See isaks_template.sty.
 \usepackage{stix}
+\usepackage{cancel}  % for cancelling terms
 
 % latex margins
 % \linespread{1.5}
@@ -141,12 +142,25 @@ precise and concise, making it easier to discuss what happens with the students 
 This is a simple example of the abstractions that can occur everywhere. However, keep in mind that this example may be a bit inflated, but the point is that some abstraction is often necessary for us to communicate efficiently.
 
 
+Intuition is sometimes very important to understand the big picture, however, it can sometimes trick you to reach the wrong conclusion. Essentially, all mathematics proofs should be independent of visual representation, but however . \textit{"The point of rigour is not to
+destroy all intuition; instead, it should be used to destroy bad intuition while clarifying and elevating good intuition." Terence Tao }\cite{Tao2022}.
+Two illustrate, we have here very easy examples \begin{align}
+    \frac{78}{17}  &=  \frac{ \cancel{7}8}{ 1 \cancel{7}} = \frac{8}{1} = 8 \\
+    \frac{19}{95}  &=  \frac{ 1\cancel{9}}{  \cancel{9} 5} = \frac{1}{5}
+\end{align}
 
+What is particularly dangerous about the calculations above is that a method based on completely incorrect intuition still arrives at the correct answer. On these special cases, one might be tricked to believe that the intuitive understanding cause
+and effect has higher generality
+than in the reality.
+
+To illustrate the importance of rigour; Low carbohydrate diets has a tendency to be correlated to weight loss. While this is likely true, one can with rigour attitude find other possible explanation such that 1) carbohydrates is
+likely a significant part of ones diet, 2) Focusing on diet may imply that one will unconsciously  also be motivated train more, which both are contributors to weight loss.
+
+By applying rigour, we do not stop at the surface observation but instead explore underlying mechanisms and potential confounding factors. Rigour ensures that conclusions are not drawn prematurely or based on incomplete reasoning, fostering a deeper
+and more accurate understanding of the phenomenon. This lesson is extremely important.
 
 
 \begin{itemize}
-    \item When things looks graphical, it does not mean it is true. Because of rigourisity
-    \item Making things dense and precise. In soft science, this is a problem
     \item Concept of growth of numbers. Visualizing exponential growth, and when things is an order of magnitude expensive.
         \begin{enumerate}[label=\arabic*)]
             \item Energy $E = \frac{1}{2}mv^2$
@@ -161,9 +175,20 @@ This is a simple example of the abstractions that can occur everywhere. However,
 \section{Mathematics as an Art form}%
 \label{sec:mathematics_for_stimulating_intellectual_mind}
 
+
+It is widely known that curiosity is genetically imprinted in our DNA from the very beginning.
+In fact, new study shows that even zebrafish voluntarily engage in cognitive stimulation opportunities, indicating their curiosity \cite{franks2023curiosity}.
+As human beings, we are a bit more advanced because we can express ourselves in various formats, such as narratives through oral or written language (fairy tales, religion, legends), dance, or drawings. We, as humans, tend to enjoy puzzles and games.
+Even my grandmother, with no formal education, enjoys playing Scrabble and Sudoku, among others.
+As humans, we enjoy socialising and sharing experiences. We also tend to spend to enjoy good food and watch movies. It is quite clear, humans are fundamentally thriving to stimulate the curiosity.
+
+This might be the reason why art has become a essential part of the human civilisation, even though the applications for it in the society is not entirely obvious.
+
+
+
+
 Beauty of mathematics, but why does this
 \begin{itemize}
-    \item For some it may be because we humans tend to like puzzles and games. Even my grandmas enjoy playing Scrabble and sudoko and more. But while this is essentially basic structures and have basic applications, is this evolved from human creativity.
     \item The beautiful symmetries that happens in theoretical mathematics.
         \begin{itemize}
             \item Compare math with Video, music and painting
@@ -173,7 +198,6 @@ Beauty of mathematics, but why does this
     \item Is it egoistic that theoretical mathematicians train for years and years, just to construct some weird symmetry only they find interesting.
         \begin{itemize}
             \item Only appreciated by the ones with enough patients to learn the hidden rules
-            \item
         \end{itemize}
 \end{itemize}
 
